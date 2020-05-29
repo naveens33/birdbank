@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer - Brid Bank</title>
+        {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href=" {%static 'style.css'%}">
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
+    <script src="{% static 'crdrchart.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <style>
+        .hide{
+                display:none
+            }
+    </style>
+    <script>
+          $(document).ready(function() {
+                $('.nav-item').removeClass('active');
+                $('#nav-transfer-tab').addClass('active');
+    });
+    </script>
+</head>
+<body>
+  {% block content1 %}
+    {% include "header2.html" %}
+  {% endblock %}
+    <div class="container-fluid card shadow-sm p-3 mb-4 bg-white rounded" style="max-width:75%;">
+          {% block content3 %}
+            {% include "header3.html" %}
+          {% endblock %}
+      <div class="row" style="margin:2%;">
+        <div class="container z-depth-1">
+            <!--Section: Content-->
+            <section class="bg-light shadow p-3 mb-4 rounded">
+                <div class="navbar row pr-lg-5 title-section">
+                    <p class="m-1">Money Transfer</p>
+                </div>
+                <div class="row m-4 p-2 border ">
+                    <div class="col-md-12">
+                        <div class="row mt-2">
+                            <div class="col-md-6 mb-1 text-right">
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="ownacc" name="customRadio" class="custom-control-input">
+                                  <label class="custom-control-label" for="ownacc">Own Account</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-1 ">
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="otheracc" name="customRadio" class="custom-control-input">
+                                  <label class="custom-control-label" for="otheracc">Other Account</label>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row" id="otheracc_data">
+                        <div class="col-md-12 mb-1 mt-4 table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="border-right text-center" scope="col">Payee Name</th>
+                                        <th class="border-right text-center" scope="col">Account Number</th>
+                                        <th class="border-right text-center" scope="col">Bank Name</th>
+                                        <th class="border-right text-center" scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small">
+                                    <tr>
+                                        <td>Mercy Mcneill</td>
+                                        <td>9884231263954936</td>
+                                        <td>Laurel Bank</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kajetan Chapman</td>
+                                        <td>5925247767748193</td>
+                                        <td>Moorfield States</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Barsati Sandipa</td>
+                                        <td>7429844648620015</td>
+                                        <td>Strathmore Pvt</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kajetan Chapman</td>
+                                        <td>2213195423875453</td>
+                                        <td>Laurel Bank</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dhritiman Salim</td>
+                                        <td>5583185435770357</td>
+                                        <td>Strathmore Pvt</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vijai Sritharan</td>
+                                        <td>8480746255092104</td>
+                                        <td>Strathmore Pvt</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-right">
+                                            <button type="button" class="btn btn-primary primary-button">
+                                             <i class="fas fa-plus-circle"></i> Add New Payee
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="border-bottom">
+                                           <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1 ">
+                                                    Payee Name
+                                                </div>
+                                                 <div class="col-md-3">
+                                                     <input type="text" class="form-control" placeholder="Enter Payee Name" style="font-size:0.8rem">
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Account Number
+                                                </div>
+                                                 <div class="col-md-3">
+                                                     <input type="text" class="form-control" placeholder="Enter Account Number" style="font-size:0.8rem">
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Bank Name
+                                                </div>
+                                                 <div class="col-md-3">
+                                                     <input type="text" class="form-control" placeholder="Enter Bank Name" style="font-size:0.8rem">
+                                                </div>
+                                            </div>
+                                             <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Mobile Number
+                                                </div>
+                                                 <div class="col-md-3">
+                                                     <input type="text" class="form-control" placeholder="Enter Mobile Number" style="font-size:0.8rem">
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-9 text-right">
+                                                    <button type="button" class="btn btn-primary primary-button">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary primary-button">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                    <div class="row hide" id="ownacc_data">
+                        <div class="col-md-12 mb-1 mt-4 table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="border-right text-center" scope="col">Account Number</th>
+                                        <th class="border-right text-center" scope="col">Branch</th>
+                                        <th class="border-right text-center" scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small">
+
+                                    <tr class="sub_heading">
+                                        <td colspan="3"><strong>Savings Accounts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>9999000453354533</td>
+                                        <td>San Martin</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>9999000453354527</td>
+                                        <td>Chumacera</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                    <tr class="sub_heading">
+                                        <td colspan="3"><strong>Loan Accounts</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>9999000453354533</td>
+                                        <td>San Martin</td>
+                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                    <div class="row sub_heading mt-4  p-2">
+                        <div class="col-md-12">
+                            <strong>Payee Information</strong>
+                        </div>
+                    </div>
+                    <div class="row small mt-3">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3 ">
+                            Payee Name
+                        </div>
+                         <div class="col-md-3">
+                             <strong>Vijai Sritharan</strong>
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            Account Number
+                        </div>
+                         <div class="col-md-3">
+                             <strong>8480746255092104</strong>
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            Bank Name
+                        </div>
+                         <div class="col-md-3">
+                             <strong>Strathmore Pvt</strong>
+                        </div>
+                    </div>
+                    <div class="row sub_heading mt-4 p-2">
+                        <div class="col-md-12 align-middle">
+                            <strong>Payment Information</strong>
+                        </div>
+                    </div>
+                    <div class="row small mt-3">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3 align-middle">
+                            Account Type
+                        </div>
+                         <div class="col-md-3">
+                             <select name="accounttype" id="accounttype" class="form-control" style="font-size:0.8rem">
+                                <option value="SAV">Savings</option>
+                                <option value="AUD">Loan</option>
+                                <option value="BTC">Credit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            Account Number
+                        </div>
+                         <div class="col-md-3">
+                             <select name="accountnumber" id="accountnumber1" class="form-control" style="font-size:0.8rem">
+                                <option value="SAV">9999000453354533</option>
+                                <option value="AUD">9999000453354527</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            Amount
+                        </div>
+                         <div class="col-md-3 ">
+                             <input type="text" class="form-control" placeholder="Enter the amount" style="font-size:0.8rem">
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            Message
+                        </div>
+                         <div class="col-md-3 ">
+                             <input type="text" class="form-control" placeholder="What's this for" style="font-size:0.8rem">
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-12 text-right">
+                        <button id="signin" type="button" class="btn btn-primary primary-button btn-rounded float-right">Confirm</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+      </div>
+    </div>
+  {% block content2 %}
+    {% include "footer.html" %}
+  {% endblock %}
+</body>
+</html>

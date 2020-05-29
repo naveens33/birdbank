@@ -1,0 +1,73 @@
+<script type="text/javascript">
+$(function() {
+    $("#nav-transactions-tab").click(function(event) {
+    var path = "/";
+            event.preventDefault();
+            window.location.href = path + "transactions";
+    });
+    $("#nav-transfer-tab").click(function(event) {
+    var path = "/";
+            event.preventDefault();
+            window.location.href = path + "transfer";
+    });
+});
+</script>
+<style>
+nav > .nav.nav-tabs{
+  border: none;
+    color:#fff;
+    background:#003366;
+    border-radius:0;
+}
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active
+{
+  border: none;
+    padding: 18px 25px;
+    color:#fff;
+    background:#003366;
+    border-radius:0;
+}
+
+.tab-content{
+  background: #fdfdfd;
+    line-height: 25px;
+    border: 1px solid #ddd;
+    border-top:5px solid #e74c3c;
+    border-bottom:5px solid #e74c3c;
+    padding:30px 25px;
+}
+
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link.active,
+nav > div a.nav-item.nav-link:focus
+{
+  border: none;
+    background: #0066cc;
+    color:#fff;
+    border-radius:0;
+    transition:background 0.20s linear;
+}
+</style>
+<!------ Include the above in your HEAD tag ---------->
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-12 ">
+      <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-account-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ACCOUNT</a>
+          <a class="nav-item nav-link" id="nav-transactions-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">TRANSACTION</a>
+          <a class="nav-item nav-link" id="nav-transfer-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">TRANSFER</a>
+          <a class="nav-item nav-link" id="nav-paybills-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">PAY BILLS</a>
+          <a class="nav-item nav-link" id="nav-purchase-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">PURCHASE</a>
+          <a class="nav-item nav-link" id="nav-loans-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">LOANS</a>
+          <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">HELP</a>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+</div>
+<script>
+</script>

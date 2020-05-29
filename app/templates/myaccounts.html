@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href=" {%static 'style.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
+    <title>My Accounts - Brid Bank</title>
+</head>
+<body>
+  {% block content2 %}
+    {% include "header2.html" %}
+  {% endblock %}
+  <div class="container-fluid card shadow-sm p-3 mb-4 bg-white rounded" style="max-width:75%;">
+      {% block content3 %}
+        {% include "header3.html" %}
+      {% endblock %}
+    <div class="row" style="margin:2%;">
+      <div class="container z-depth-1">
+        <!--Section: Content-->
+        <section class="bg-light shadow p-3 mb-4 rounded">
+            <div class="navbar row pr-lg-5 title-section">
+            <p class="m-1">Savings Accounts</p>
+            </div>
+          <div class="row mt-4 border-bottom border-secondary">
+            <div class="col-md-3 mb-1 align-items-center">
+                Account Number
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                Branch
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                Avaiable Balance
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                  Transactions
+            </div>
+          </div>
+          <div class="row mt-4 small">
+            <div class="col-md-3 mb-1 align-items-center">
+                9999000453354533
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                San Martin
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                ₹ 3,005.00
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                <a class="native-color">Click here for transactions history</a>
+            </div>
+          </div>
+          <div class="row mt-4 small">
+            <div class="col-md-3 mb-1 align-items-center">
+                9999000453354527
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                Chumacera
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                ₹ 5.96
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                <a class="native-color">Click here for transactions history</a>
+            </div>
+          </div>
+        </section>
+        <!--Section: Content-->
+        <section class="bg-light shadow p-3 mb-4 rounded">
+            <div class="navbar row pr-lg-5 title-section">
+            <p class="m-1">Loan Accounts</p>
+            </div>
+          <div class="row mt-4 border-bottom border-secondary">
+            <div class="col-md-3 mb-1 align-items-center">
+                Account Number
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                Branch
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                Avaiable Balance
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                  Transactions
+            </div>
+          </div>
+          <div class="row mt-4 small">
+            <div class="col-md-3 mb-1 align-items-center">
+                9999000453354533
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                San Martin
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                ₹ 3,005.00
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                <a class="native-color">Click here for transactions history</a>
+            </div>
+          </div>
+        </section>
+        <section class="bg-light shadow p-3 mb-4 rounded">
+            <div class="navbar row pr-lg-5 title-section">
+            <p class="m-1">Credit Card</p>
+            </div>
+          <div class="row mt-4 border-bottom border-secondary">
+            <div class="col-md-3 mb-1 align-items-center">
+                Account Number
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                Branch
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                Avaiable Balance
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                  Transactions
+            </div>
+          </div>
+          <div class="row mt-4 small">
+            <div class="col-md-3 mb-1 align-items-center">
+                9999000453354533
+            </div>
+            <div class="col-md-3 mb-1align-items-center">
+                San Martin
+            </div>
+              <div class="col-md-3 mb-1 align-items-center">
+                ₹ 3,005.00
+            </div>
+            <div class="col-md-3 mb-1 align-items-center">
+                <a class="native-color">Click here for transactions history</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  {% block content1 %}
+    {% include "footer.html" %}
+  {% endblock %}
+</body>
+</html>

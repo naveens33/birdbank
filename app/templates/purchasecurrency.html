@@ -1,0 +1,160 @@
+<div class="container my-3 py-3 z-depth-1">
+  <!--Section: Content-->
+  <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+
+    <style>
+      .map-container {
+        height: 230px;
+        position: relative;
+      }
+
+      .map-container iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      .hide{
+      display:none;
+      }
+    </style>
+
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
+
+      <!--Grid column-->
+      <div class="col-md-12 text-center">
+
+        <h3 class="font-weight-bold">PURCHASE FOREIGN CURRENCY</h3>
+
+        <p class="text-muted">Try estimating the currency and purchase the same</p>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <div class="row mb-2">
+              <div class="mt-3 mr-2">
+                <select name="source" id="source" class="form-control">
+                    <option value="ARS">Argentina Peso</option>
+                    <option value="AUD">Australia Dollar</option>
+                    <option value="BTC">Bitcoin</option>
+                    <option value="BRL">Brazil Real</option>
+                    <option value="CAD">Canada Dollar</option>
+                    <option value="CLP">Chile Peso</option>
+                    <option value="CNY">China Yuan Renminbi</option>
+                    <option value="CZK">Czech Republic Koruna</option>
+                    <option value="DKK">Denmark Krone</option>
+                    <option value="EUR">Euro Member Countries</option>
+                    <option value="FJD">Fiji Dollar</option>
+                    <option value="HNL">Honduras Lempira</option>
+                    <option value="HKD">Hong Kong Dollar</option>
+                    <option value="HUF">Hungary Forint</option>
+                    <option value="ISK">Iceland Krona</option>
+                    <option value="INR" selected>India Rupee</option>
+                    <option value="IDR">Indonesia Rupiah</option>
+                    <option value="ILS">Israel Shekel</option>
+                    <option value="JPY">Japan Yen</option>
+                    <option value="KRW">Korea (South) Won</option>
+                    <option value="MYR">Malaysia Ringgit</option>
+                    <option value="MXN">Mexico Peso</option>
+                    <option value="NZD">New Zealand Dollar</option>
+                    <option value="NOK">Norway Krone</option>
+                    <option value="PKR">Pakistan Rupee</option>
+                    <option value="PHP">Philippines Peso</option>
+                    <option value="PLN">Poland Zloty</option>
+                    <option value="RUB">Russia Ruble</option>
+                    <option value="SGD">Singapore Dollar</option>
+                    <option value="ZAR">South Africa Rand</option>
+                    <option value="SEK">Sweden Krona</option>
+                    <option value="CHF">Switzerland Franc</option>
+                    <option value="TWD">Taiwan New Dollar</option>
+                    <option value="THB">Thailand Baht</option>
+                    <option value="TRY">Turkey Lira</option>
+                    <option value="GBP">United Kingdom Pound</option>
+                    <option value="USD">United States Dollar</option>
+                    <option value="VND">Viet Nam Dong</option>
+                    </select>
+              </div>
+              <div class="mt-3 mr-2">
+                <input type="text" id="form-source" class="form-control">
+              </div>
+          </div>
+          <div class="row mb-2">
+              <div class="mt-3 mr-2">
+                <select name="source" id="target" class="form-control">
+                    <option value="ARS">Argentina Peso</option>
+                    <option value="AUD">Australia Dollar</option>
+                    <option value="BTC">Bitcoin</option>
+                    <option value="BRL">Brazil Real</option>
+                    <option value="CAD">Canada Dollar</option>
+                    <option value="CLP">Chile Peso</option>
+                    <option value="CNY">China Yuan Renminbi</option>
+                    <option value="CZK">Czech Republic Koruna</option>
+                    <option value="DKK">Denmark Krone</option>
+                    <option value="EUR">Euro Member Countries</option>
+                    <option value="FJD">Fiji Dollar</option>
+                    <option value="HNL">Honduras Lempira</option>
+                    <option value="HKD">Hong Kong Dollar</option>
+                    <option value="HUF">Hungary Forint</option>
+                    <option value="ISK">Iceland Krona</option>
+                    <option value="INR">India Rupee</option>
+                    <option value="IDR">Indonesia Rupiah</option>
+                    <option value="ILS">Israel Shekel</option>
+                    <option value="JPY">Japan Yen</option>
+                    <option value="KRW">Korea (South) Won</option>
+                    <option value="MYR">Malaysia Ringgit</option>
+                    <option value="MXN">Mexico Peso</option>
+                    <option value="NZD">New Zealand Dollar</option>
+                    <option value="NOK">Norway Krone</option>
+                    <option value="PKR">Pakistan Rupee</option>
+                    <option value="PHP">Philippines Peso</option>
+                    <option value="PLN">Poland Zloty</option>
+                    <option value="RUB">Russia Ruble</option>
+                    <option value="SGD">Singapore Dollar</option>
+                    <option value="ZAR">South Africa Rand</option>
+                    <option value="SEK">Sweden Krona</option>
+                    <option value="CHF">Switzerland Franc</option>
+                    <option value="TWD">Taiwan New Dollar</option>
+                    <option value="THB">Thailand Baht</option>
+                    <option value="TRY">Turkey Lira</option>
+                    <option value="GBP">United Kingdom Pound</option>
+                    <option value="USD" selected>United States Dollar</option>
+                    <option value="VND">Viet Nam Dong</option>
+                    </select>
+              </div>
+              <div class="mt-3 mr-2">
+                <input type="text" id="form-target" class="form-control">
+              </div>
+
+          </div>
+          <div class="row mb-2">
+              <p class="small">1 Indian Rupee equals to 0.013 United States Dollar</p>
+              <p class="h3 hide">100 Indian Rupee equals to 1.32 United States Dollar</p>
+          </div>
+          <div class="row mb-2">
+              <button type="button" class="btn btn-primary primary-button btn-rounded mt-2">Calculate <i class="fas fa-search-dollar"></i></button>
+          </div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-0 mb-md-0" style="text-align:right">
+            {% load static %}
+              <img src="{% static 'chart_currency.jpg'%}" style="height:250px">
+        </div>
+        <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </section>
+  <!--Section: Content-->
+</div>
+

@@ -1,0 +1,23 @@
+
+html,body,h1,h2,h3,h4 {font-family:"Verdana", sans-serif}
+.header{background: linear-gradient(to right, #003366 28%, #ffffff 112%);}
+.title-section, .modal_header{
+    background: linear-gradient(to right, #003366 28%, #ffffff 112%);
+    color: #ffffff;
+    }
+.modal_footer{
+    background: #F0F0F0;
+}
+.logo{height: 35px}
+.primary-button{background-color:#003366; color: #ffffff;}
+.media-links{background-color:#F5F5F5; color: #003366;}
+.menu-item{background: linear-gradient(to bottom, #dcdcdc 0%, #ffffff 100%); color: #003366;}
+a.native-color{color:#003366; cursor:pointer; text-decoration: none;}
+footer{background-color:#003366; color: #ffffff;}
+.sub_heading{background-color:#d9d9d9; color:#003366; font-size:0.9rem}
+.box1{background-color:#F5F5F5; }
+body{background: linear-gradient(to bottom right, #F5F5F5 -22%, #ffffff 100%); color: #003366;}
+.mySlides {display:none}
+.next{background-color:#003366; color: #ffffff; font-size:x-large; cursor:pointer;}
+.excel_icon{color:#00802b ;font-size: 4rem; cursor:pointer;}
+.pdf_icon{color:#cc2900; font-size: 4rem; cursor:pointer;}

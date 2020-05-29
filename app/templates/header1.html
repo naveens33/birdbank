@@ -1,0 +1,38 @@
+{% load static %}
+<header class=" header navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+      <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+        <img class="logo" src="{%static 'logo.png'%}" alt="">
+      </a>
+      <div class="navbar-nav-scroll">
+          <ul class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item">
+
+            </li>
+              <li class="nav-item">
+              <a class="nav-link active" href="/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Personal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Corporate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/docs/4.0/examples/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Examples');">NRI</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://themes.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Themes');" target="_blank" rel="noopener">Agri</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://expo.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');" target="_blank" rel="noopener">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://blog.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');" target="_blank" rel="noopener">Offer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://blog.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');" target="_blank" rel="noopener">Help</a>
+            </li>
+          </ul>
+      </div>
+      <div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </header>
