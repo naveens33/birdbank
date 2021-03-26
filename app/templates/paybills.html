@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Transfer - Bird Bank</title>
+    <title>Pay Bills - Bird Bank</title>
         {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,11 +23,26 @@
         .hide{
                 display:none
             }
+            .ui-datepicker {font-size: 12px;}
+            .ui-datepicker-header {
+                background: url('../img/dark_leather.png') repeat 0 0 #003366;
+                color: #e0e0e0;
+                font-weight: bold;
+                -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+                -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+                box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+                text-shadow: 1px -1px 0px #000;
+                filter: dropshadow(color=#000, offx=1, offy=-1);
+                line-height: 30px;
+                border-width: 1px 0 0 0;
+                border-style: solid;
+                border-color: #003366;
+            }
     </style>
     <script>
           $(document).ready(function() {
                 $('.nav-item').removeClass('active');
-                $('#nav-transfer-tab').addClass('active');
+                $('#nav-paybills-tab').addClass('active');
     });
     </script>
 </head>
@@ -44,119 +59,190 @@
             <!--Section: Content-->
             <section class="bg-light shadow p-3 mb-4 rounded">
                 <div class="navbar row pr-lg-5 title-section">
-                    <p class="m-1">Money Transfer</p>
+                    <p class="m-1">Bill Payment</p>
                 </div>
                 <div class="row m-4 p-2 border ">
                     <div class="col-md-12">
-                        <div class="row mt-2">
-                            <div class="col-md-6 mb-1 text-right">
-                                <div class="custom-control custom-radio">
-                                  <input type="radio" id="ownacc" name="customRadio" class="custom-control-input">
-                                  <label class="custom-control-label" for="ownacc">Own Account</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-1 ">
-                                <div class="custom-control custom-radio">
-                                  <input type="radio" id="otheracc" name="customRadio" class="custom-control-input">
-                                  <label class="custom-control-label" for="otheracc">Other Account</label>
-                                </div>
-                            </div>
-                        </div>
                     <div class="row" id="otheracc_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="border-right text-center" scope="col">Payee Name</th>
-                                        <th class="border-right text-center" scope="col">Account Number</th>
-                                        <th class="border-right text-center" scope="col">Bank Name</th>
-                                        <th class="border-right text-center" scope="col"></th>
+                                        <th class="border-right text-center" rowspan="2" scope="col">Biller Name</th>
+                                        <th class="border-right text-center" rowspan="2" scope="col">Registration Number</th>
+                                        <th class="border-right text-center" rowspan="2" scope="col">City</th>
+                                        <th class="border-right text-center" colspan="5" scope="col">Auto Pay</th>
+                                        <th class="border-right text-center" rowspan="2" scope="col"></th>
+                                        <th class="border-right text-center" rowspan="2" scope="col"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-right text-center" scope="col">Status</th>
+                                        <th class="border-right text-center" scope="col">Amount</th>
+                                        <th class="border-right text-center" scope="col">Freq.</th>
+                                        <th class="border-right text-center" scope="col">StartDate</th>
+                                        <th class="border-right text-center" scope="col">EndDate</th>
                                     </tr>
                                 </thead>
                                 <tbody class="small">
                                     <tr>
-                                        <td>Mercy Mcneill</td>
+                                        <td>SBI Life Insurance Company Limited</td>
                                         <td>9884231263954936</td>
                                         <td>Laurel Bank</td>
+                                        <td class="text-center">No</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
-                                        <td>Kajetan Chapman</td>
+                                        <td>Yes Mutual Fund</td>
                                         <td>5925247767748193</td>
                                         <td>Moorfield States</td>
+                                        <td class="text-center">No</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
-                                        <td>Barsati Sandipa</td>
+                                        <td>TATA Mutual Fund iSIP</td>
                                         <td>7429844648620015</td>
                                         <td>Strathmore Pvt</td>
+                                        <td class="text-center">Yes</td>
+                                        <td class="text-center">₹10500.46</td>
+                                        <td class="text-center">Monthly</td>
+                                        <td class="text-center">16-06-2020</td>
+                                        <td class="text-center">16-06-2022</td>
+                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
-                                        <td>Kajetan Chapman</td>
+                                        <td>VISVODAYAA TRUST</td>
                                         <td>2213195423875453</td>
                                         <td>Laurel Bank</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center">No</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center p-2 next"><i class="far fa-edit"></i></td>
+                                        <td class="text-center p-2 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
-                                        <td>Dhritiman Salim</td>
-                                        <td>5583185435770357</td>
-                                        <td>Strathmore Pvt</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vijai Sritharan</td>
-                                        <td>8480746255092104</td>
-                                        <td>Strathmore Pvt</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" class="text-right">
+                                        <td colspan="10" class="text-right">
                                             <button type="button" class="btn btn-primary primary-button">
-                                             <i class="fas fa-plus-circle"></i> Add New Payee
+                                             <i class="fas fa-plus-circle"></i> Add New Biller
                                             </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" class="border-bottom">
+                                        <td colspan="8" class="border-bottom">
                                            <div class="row mt-2">
                                                 <div class="col-md-4 text-right">
                                                 </div>
                                                 <div class="col-md-2 ml-1 ">
-                                                    Payee Name
+                                                    Biller Name
                                                 </div>
                                                  <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Payee Name" style="font-size:0.8rem">
+                                                     <input type="text" class="form-control" placeholder="Enter Biller Name" style="font-size:0.8rem">
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-md-4 text-right">
                                                 </div>
                                                 <div class="col-md-2 ml-1">
-                                                    Account Number
+                                                    Registration Number
                                                 </div>
                                                  <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Account Number" style="font-size:0.8rem">
+                                                     <input type="text" class="form-control" placeholder="Enter Registration Number" style="font-size:0.8rem">
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col-md-4 text-right">
                                                 </div>
                                                 <div class="col-md-2 ml-1">
-                                                    Bank Name
+                                                    Auto Pay
                                                 </div>
                                                  <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Bank Name" style="font-size:0.8rem">
+                                                     <div class="row ">
+                                                        <div class="col-md-6 mb-1 ">
+                                                            <div class="custom-control custom-radio">
+                                                              <input type="radio" id="yes" name="customRadio" class="custom-control-input">
+                                                              <label class="custom-control-label" for="yes">Yes</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-1 ">
+                                                            <div class="custom-control custom-radio">
+                                                              <input type="radio" id="no" name="customRadio" class="custom-control-input">
+                                                              <label class="custom-control-label" for="no">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                              <div class="row mt-2">
                                                 <div class="col-md-4 text-right">
                                                 </div>
                                                 <div class="col-md-2 ml-1">
-                                                    Mobile Number
+                                                    Auto Pay Limit
                                                 </div>
                                                  <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Mobile Number" style="font-size:0.8rem">
+                                                     <input type="text" class="form-control" placeholder="Enter Pay Limit" style="font-size:0.8rem">
+                                                </div>
+                                            </div>
+                                             <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Auto Pay Frequency
+                                                </div>
+                                                 <div class="col-md-3">
+                                                     <select name="accounttype" id="frequency" class="form-control" style="font-size:0.8rem">
+                                                        <option value="SAV">Monthly</option>
+                                                        <option value="AUD">Quarterly</option>
+                                                        <option value="BTC">Half Yearly</option>
+                                                        <option value="BTC">Annually</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Auto Pay StartDate
+                                                </div>
+                                                 <div class="col-md-3">
+                                                    <input type="text" id="start_date" class=" date_picker form-control form-control-sm">
+                                                    <script>
+                                                        $(document).ready(function() {
+
+                                                            $(function() {
+                                                                $( ".date_picker" ).datepicker();
+                                                            });
+                                                        })
+                                                    </script>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-4 text-right">
+                                                </div>
+                                                <div class="col-md-2 ml-1">
+                                                    Auto Pay EndDate
+                                                </div>
+                                                 <div class="col-md-3">
+                                                    <input type="text" id="end_date" class=" date_picker form-control form-control-sm">
+                                                    <script>
+                                                        $(document).ready(function() {
+
+                                                            $(function() {
+                                                                $( ".date_picker" ).datepicker();
+                                                            });
+                                                        })
+                                                    </script>
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
@@ -165,7 +251,7 @@
                                                         Cancel
                                                     </button>
                                                     <button type="button" class="btn btn-primary primary-button">
-                                                        Save
+                                                        Continue
                                                     </button>
                                                 </div>
                                             </div>
@@ -214,37 +300,37 @@
                     </div>
                     <div class="row sub_heading mt-4  p-2">
                         <div class="col-md-12">
-                            <strong>Payee Information</strong>
+                            <strong>Biller Information</strong>
                         </div>
                     </div>
                     <div class="row small mt-3">
                         <div class="col-md-4 text-right">
                         </div>
                         <div class="col-md-2 ml-3 ">
-                            Payee Name
+                            Biller Name
                         </div>
-                         <div class="col-md-3">
-                             <strong>Vijai Sritharan</strong>
-                        </div>
-                    </div>
-                    <div class="row small mt-2">
-                        <div class="col-md-4 text-right">
-                        </div>
-                        <div class="col-md-2 ml-3">
-                            Account Number
-                        </div>
-                         <div class="col-md-3">
-                             <strong>8480746255092104</strong>
+                         <div class="col-md-4">
+                             <strong>SBI Life Insurance Company Limited</strong>
                         </div>
                     </div>
                     <div class="row small mt-2">
                         <div class="col-md-4 text-right">
                         </div>
                         <div class="col-md-2 ml-3">
-                            Bank Name
+                            Registration Number
                         </div>
                          <div class="col-md-3">
-                             <strong>Strathmore Pvt</strong>
+                             <strong>9884231263954936</strong>
+                        </div>
+                    </div>
+                    <div class="row small mt-2">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-2 ml-3">
+                            City
+                        </div>
+                         <div class="col-md-3">
+                             <strong>Novy Leningrad</strong>
                         </div>
                     </div>
                     <div class="row sub_heading mt-4 p-2">

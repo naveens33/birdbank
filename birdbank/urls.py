@@ -20,9 +20,15 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('login', views.login, name='login'),
+    path('login', views.login_view, name='login_view'),
+    path('logout',views.logout_view,name='logout_view'),
     path('myaccounts', views.myaccounts, name='myaccounts'),
     path('transactions', views.transactions, name='transactions'),
     path('transfer', views.transfer, name='transfer'),
+    path('paybills', views.paybills, name='paybills'),
+    path('purchase', views.purchase, name='purchase'),
+    path('loans', views.loans, name='loans'),
+    path('help', views.help, name='help'),
+    path('forgotpassword', views.forgotpassword, name='forgotpassword'),
     path('testreport', views.testreport, name='testreport'),
 ]

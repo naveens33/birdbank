@@ -8,6 +8,7 @@ html,body,h1,h2,h3,h4 {font-family:"Verdana", sans-serif}
 .modal_footer{
     background: #F0F0F0;
 }
+.medium{font-size:90%;}
 .logo{height: 35px}
 .primary-button{background-color:#003366; color: #ffffff;}
 .media-links{background-color:#F5F5F5; color: #003366;}
@@ -21,3 +22,118 @@ body{background: linear-gradient(to bottom right, #F5F5F5 -22%, #ffffff 100%); c
 .next{background-color:#003366; color: #ffffff; font-size:x-large; cursor:pointer;}
 .excel_icon{color:#00802b ;font-size: 4rem; cursor:pointer;}
 .pdf_icon{color:#cc2900; font-size: 4rem; cursor:pointer;}
+.zoom:hover{
+    transform: scale(1.1);
+}
+.img-responsive{
+    width:100%;
+}
+.product-div1{
+    position:relative;
+    overflow:hidden;
+}
+.transition{
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+.img-transform{
+    transform: scale(1);
+}
+
+.draggable:hover .grams-overlay {
+  opacity: 1;
+}
+
+.grams-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+}
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+ .input_field{
+    width:100%;
+    height:calc(1.5em + .75rem + 2px);
+    font-size:1rem;
+    font-weight:400;
+    line-height:1.5;
+    color:#495057;
+    background-color:#fff;
+    background-clip:padding-box;
+    border:1px solid #ced4da;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+ }
+ .input-rupee {
+     position: relative;
+     font-size: larger;
+ }
+ .input-rupee.left input {
+     padding-left:18px;
+ }
+ .input-rupee.right input {
+     padding-right:18px;
+     text-align:end;
+ }
+ .input-rupee:before {
+     position: absolute;
+     top: 0;
+     content:"₹";
+ }
+ .input-rupee.left:before {
+     left: 5px;
+ }
+ .input-rupee.right:before {
+     right: 5px;
+ }
+
+ .input-percentage {
+     position: relative;
+     font-size: larger;
+ }
+
+ .input-percentage.right input {
+     padding-right:30px !important;
+ }
+ .input-percentage.right:before {
+     right: 50px;
+ }
+ .input-percentage:before {
+     position: absolute;
+     top: 0;
+     content:"%";
+ }
+
+ .input-year {
+     position: relative;
+     font-size: larger;
+ }
+
+ .input-year.right input {
+     padding-right:30px !important;
+ }
+ .input-year.right:before {
+     right: 50px;
+ }
+ .input-year:before {
+     position: absolute;
+     top: 0;
+     content:"Year";
+ }
