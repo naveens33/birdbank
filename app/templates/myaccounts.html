@@ -16,6 +16,10 @@
     <title>My Accounts - Bird Bank</title>
 </head>
 <body>
+<ul>
+
+</ul>
+
   {% block content2 %}
     {% include "header2.html" %}
   {% endblock %}
@@ -44,34 +48,27 @@
                   Transactions
             </div>
           </div>
-          <div class="row mt-4 small">
-            <div class="col-md-3 mb-1 align-items-center">
-                9999000453354533
-            </div>
-            <div class="col-md-3 mb-1align-items-center">
-                San Martin
-            </div>
-              <div class="col-md-3 mb-1 align-items-center">
-                ₹ 3,005.00
-            </div>
-            <div class="col-md-3 mb-1 align-items-center">
-                <a class="native-color">Click here for transactions history</a>
-            </div>
-          </div>
-          <div class="row mt-4 small">
-            <div class="col-md-3 mb-1 align-items-center">
-                9999000453354527
-            </div>
-            <div class="col-md-3 mb-1align-items-center">
-                Chumacera
-            </div>
-              <div class="col-md-3 mb-1 align-items-center">
-                ₹ 5.96
-            </div>
-            <div class="col-md-3 mb-1 align-items-center">
-                <a class="native-color">Click here for transactions history</a>
-            </div>
-          </div>
+
+          {% for k,v in myaccounts.items %}
+              {% if k == 'Savings' %}
+                {% for account in v %}
+                <div class="row mt-4 small">
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.AccountNumber}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.Branch}}
+                    </div>
+                      <div class="col-md-3 mb-1 align-items-center">
+                        ₹ {{account.Balance}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        <a class="native-color">Click here for transactions history</a>
+                    </div>
+                </div>
+                {% endfor %}
+              {% endif %}
+          {% endfor %}
         </section>
         <!--Section: Content-->
         <section class="bg-light shadow p-3 mb-4 rounded">
@@ -92,20 +89,26 @@
                   Transactions
             </div>
           </div>
-          <div class="row mt-4 small">
-            <div class="col-md-3 mb-1 align-items-center">
-                9999000453354533
-            </div>
-            <div class="col-md-3 mb-1align-items-center">
-                San Martin
-            </div>
-              <div class="col-md-3 mb-1 align-items-center">
-                ₹ 3,005.00
-            </div>
-            <div class="col-md-3 mb-1 align-items-center">
-                <a class="native-color">Click here for transactions history</a>
-            </div>
-          </div>
+          {% for k,v in myaccounts.items %}
+              {% if k == 'Loan' %}
+                {% for account in v %}
+                <div class="row mt-4 small">
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.AccountNumber}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.Branch}}
+                    </div>
+                      <div class="col-md-3 mb-1 align-items-center">
+                        ₹ {{account.Balance}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        <a class="native-color">Click here for transactions history</a>
+                    </div>
+                </div>
+                {% endfor %}
+              {% endif %}
+          {% endfor %}
         </section>
         <section class="bg-light shadow p-3 mb-4 rounded">
             <div class="navbar row pr-lg-5 title-section">
@@ -125,20 +128,26 @@
                   Transactions
             </div>
           </div>
-          <div class="row mt-4 small">
-            <div class="col-md-3 mb-1 align-items-center">
-                9999000453354533
-            </div>
-            <div class="col-md-3 mb-1align-items-center">
-                San Martin
-            </div>
-              <div class="col-md-3 mb-1 align-items-center">
-                ₹ 3,005.00
-            </div>
-            <div class="col-md-3 mb-1 align-items-center">
-                <a class="native-color">Click here for transactions history</a>
-            </div>
-          </div>
+            {% for k,v in myaccounts.items %}
+              {% if k == 'CreditCard' %}
+                {% for account in v %}
+                <div class="row mt-4 small">
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.AccountNumber}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        {{account.Branch}}
+                    </div>
+                      <div class="col-md-3 mb-1 align-items-center">
+                        ₹ {{account.Balance}}
+                    </div>
+                    <div class="col-md-3 mb-1 align-items-center">
+                        <a class="native-color">Click here for transactions history</a>
+                    </div>
+                </div>
+                {% endfor %}
+              {% endif %}
+          {% endfor %}
         </section>
       </div>
     </div>

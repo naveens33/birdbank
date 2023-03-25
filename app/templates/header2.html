@@ -5,8 +5,8 @@
       </a>
     <div>
             <span class="ml-5" style="color: #ffffff">Welcome, </span>
-            <span id="uname" class="" style="color: #ffffff">Uname1</span><br/>
-            <span id="lastlogin" class="small ml-5" style="color: #ffffff"></span>
+            <span id="uname" class="" style="color: #ffffff">{{ user.username }}</span><br/>
+            <span id="lastlogin" class="small ml-5" style="color: #ffffff">Last Login -  {{user.last_login}}</span>
 </div>
 
       <div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
@@ -23,10 +23,10 @@
       <a id="logout" onclick="document.getElementById('form1').submit();" class="float-right native-color "><i class="fas fa-power-off" style="font-size:30px"></i></a>
     </form>
 </header>
-<script>
+<!--<script>
     $( document ).ready(function() {
         var today = new Date();
         var timestamp = "Last Login - "+today.getHours() + ":" + today.getMinutes()+", "+today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
         $("#lastlogin").text(timestamp);
     });
-</script>
+</script>-->

@@ -7,8 +7,10 @@ from django.contrib.auth.decorators import login_required
 # from birdbank.forms import UserLoginForm
 
 # Create your views here.
+from django.template import loader
 from django.urls import reverse
 
+from app.models import Account
 
 
 def index(request):
@@ -58,9 +60,22 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-@login_required
 def myaccounts(request):
-    return render(request, "myaccounts.html")
+  myaccounts = Account.objects.all().values()
+  template = loader.get_template('myaccounts.html')
+  data = {}
+  for myaccount in myaccounts:
+    if myaccount['Type'] in data.keys():
+        data[myaccount['Type']].append(myaccount)
+    else:
+        data[myaccount['Type']] = [myaccount]
+  print(data)
+  context = {
+    'myaccounts': data,
+  }
+
+  return HttpResponse(template.render(context, request))
+
 
 @login_required
 def transactions(request):
