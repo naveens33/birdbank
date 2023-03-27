@@ -13,3 +13,15 @@ class Account(models.Model):
     Type = models.CharField(max_length=30)
     Balance = models.FloatField()
     IFSCCode = models.CharField(max_length=30)
+
+class Transaction(models.Model):
+    AccountNumber = models.ForeignKey(
+        Account,
+        to_field='AccountNumber',
+        on_delete=models.CASCADE
+    )
+    Date = models.DateField()
+    Type = models.CharField(max_length=30)
+    Amount = models.FloatField()
+    Balance = models.FloatField()
+    Particulars = models.CharField(max_length=200)

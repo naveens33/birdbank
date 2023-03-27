@@ -1,4 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
+import datetime
+import json
+
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import (authenticate, login, logout)
 from django.contrib.auth.decorators import login_required
@@ -10,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.urls import reverse
 
-from app.models import Account
+from app.models import Account, Transaction
 
 
 def index(request):
@@ -79,7 +82,21 @@ def myaccounts(request):
 
 @login_required
 def transactions(request):
-    return render(request, "transactions.html")
+    transactions = Transaction.objects.all().values()
+    myaccounts = Account.objects.all().values()
+    template = loader.get_template('transactions.html')
+    data ={}
+    for myaccount in myaccounts:
+        if myaccount['Type'] in data.keys():
+            data[myaccount['Type']].append(myaccount['AccountNumber'])
+        else:
+            data[myaccount['Type']] = [myaccount['AccountNumber']]
+    context = {
+        'transactions': transactions,
+        'accounts': data
+    }
+    print(data)
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def transfer(request):
@@ -107,3 +124,29 @@ def testreport(request):
 
 def forgotpassword(request):
     return render(request,"forgotpassword.html")
+
+
+def getAccountNumber(request):
+    if request.method == 'GET':
+        type = request.GET['type']
+        myaccounts = Account.objects.all().values()
+        data = []
+        for myaccount in myaccounts:
+            if myaccount['Type'][:3] == type:
+                data.append(myaccount['AccountNumber'])
+        print(data,type)
+        return HttpResponse(json.dumps({'data': data}), content_type="application/json")  # Sending an success response
+    else:
+        return HttpResponse("Request method is not a GET")
+
+
+def getTransactions(request):
+    if request.method == 'GET':
+        accountNumber = request.GET['accountNumber']
+        transactions = Transaction.objects.filter(AccountNumber = accountNumber).values()[:5]
+
+        transactions = [{'Date':transaction['Date'].strftime("%m-%d-%Y"),'Type':transaction['Type'],'Particulars':transaction['Particulars'],'Amount':transaction['Amount'],'Balance':transaction['Balance']}for transaction in transactions]
+
+        return HttpResponse(json.dumps({'transactions': transactions}), content_type="application/json")  # Sending an success response
+    else:
+        return HttpResponse("Request method is not a GET")
