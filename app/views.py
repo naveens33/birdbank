@@ -72,11 +72,9 @@ def myaccounts(request):
         data[myaccount['Type']].append(myaccount)
     else:
         data[myaccount['Type']] = [myaccount]
-  print(data)
   context = {
     'myaccounts': data,
   }
-
   return HttpResponse(template.render(context, request))
 
 
@@ -95,12 +93,22 @@ def transactions(request):
         'transactions': transactions,
         'accounts': data
     }
-    print(data)
     return HttpResponse(template.render(context, request))
 
 @login_required
 def transfer(request):
-    return render(request, "transfer.html")
+    myaccounts = Account.objects.all().values()
+    template = loader.get_template('transfer.html')
+    data = {}
+    for myaccount in myaccounts:
+        if myaccount['Type'] in data.keys():
+            data[myaccount['Type']].append(myaccount)
+        else:
+            data[myaccount['Type']] = [myaccount]
+    context = {
+        'myaccounts': data,
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def paybills(request):
@@ -134,7 +142,6 @@ def getAccountNumber(request):
         for myaccount in myaccounts:
             if myaccount['Type'][:3] == type:
                 data.append(myaccount['AccountNumber'])
-        print(data,type)
         return HttpResponse(json.dumps({'data': data}), content_type="application/json")  # Sending an success response
     else:
         return HttpResponse("Request method is not a GET")

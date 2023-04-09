@@ -25,10 +25,18 @@
             }
     </style>
     <script>
-          $(document).ready(function() {
-                $('.nav-item').removeClass('active');
-                $('#nav-transfer-tab').addClass('active');
-    });
+      $(document).ready(function() {
+        $('.nav-item').removeClass('active');
+        $('#nav-transfer-tab').addClass('active');
+         $("#ownacc").click(function () {
+            $("#ownacc_data").removeClass("hide");
+            $("#otheracc_data").addClass("hide");
+         });
+         $("#otheracc").click(function () {
+            $("#ownacc_data").addClass("hide");
+            $("#otheracc_data").removeClass("hide");
+         });
+      });
     </script>
 </head>
 <body>
@@ -51,7 +59,7 @@
                         <div class="row mt-2">
                             <div class="col-md-6 mb-1 text-right">
                                 <div class="custom-control custom-radio">
-                                  <input type="radio" id="ownacc" name="customRadio" class="custom-control-input">
+                                  <input type="radio" id="ownacc" name="customRadio" class="custom-control-input" checked>
                                   <label class="custom-control-label" for="ownacc">Own Account</label>
                                 </div>
                             </div>
@@ -62,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="row" id="otheracc_data">
+                    <div class="row hide" id="otheracc_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-light">
@@ -175,7 +183,7 @@
                             </table>
                        </div>
                     </div>
-                    <div class="row hide" id="ownacc_data">
+                    <div class="row" id="ownacc_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table">
                                 <thead class="thead-light">
@@ -186,28 +194,48 @@
                                     </tr>
                                 </thead>
                                 <tbody class="small">
-
                                     <tr class="sub_heading">
                                         <td colspan="3"><strong>Savings Accounts</strong></td>
                                     </tr>
-                                    <tr>
-                                        <td>9999000453354533</td>
-                                        <td>San Martin</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9999000453354527</td>
-                                        <td>Chumacera</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
+                                    {% for k,v in myaccounts.items %}
+                                      {% if k == 'Savings' %}
+                                        {% for account in v %}
+                                            <tr>
+                                                <td>{{account.AccountNumber}}<span>  (Balance: ₹{{account.Balance}})</span></td>
+                                                <td>{{account.Branch}}</td>
+                                                <td class="text-center p-0 next" id="{{account.AccountNumber}}"><i class="fas fa-angle-double-right"></i></td>
+                                            </tr>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endfor %}
                                     <tr class="sub_heading">
                                         <td colspan="3"><strong>Loan Accounts</strong></td>
                                     </tr>
-                                    <tr>
-                                        <td>9999000453354533</td>
-                                        <td>San Martin</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                    {% for k,v in myaccounts.items %}
+                                      {% if k == 'Loan' %}
+                                        {% for account in v %}
+                                            <tr>
+                                                <td>{{account.AccountNumber}}<span>  (Balance: ₹{{account.Balance}})</span></td>
+                                                <td>{{account.Branch}}</td>
+                                                <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                            </tr>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endfor %}
+                                    <tr class="sub_heading">
+                                        <td colspan="3"><strong>Credit Card</strong></td>
                                     </tr>
+                                    {% for k,v in myaccounts.items %}
+                                      {% if k == 'CreditCard' %}
+                                        {% for account in v %}
+                                            <tr>
+                                                <td>{{account.AccountNumber}}<span>  (Balance: ₹{{account.Balance}})</span></td>
+                                                <td>{{account.Branch}}</td>
+                                                <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                            </tr>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endfor %}
                                 </tbody>
                             </table>
                        </div>
