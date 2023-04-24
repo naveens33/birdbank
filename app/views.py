@@ -1,5 +1,6 @@
 import datetime
 import json
+import time
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -112,7 +113,20 @@ def transfer(request):
 
 @login_required
 def paybills(request):
-    return render(request, "paybills.html")
+    transactions = Transaction.objects.all().values()
+    myaccounts = Account.objects.all().values()
+    template = loader.get_template("paybills.html")
+    data = {}
+    for myaccount in myaccounts:
+        if myaccount['Type'] in data.keys():
+            data[myaccount['Type']].append(myaccount['AccountNumber'])
+        else:
+            data[myaccount['Type']] = [myaccount['AccountNumber']]
+    context = {
+        'transactions': transactions,
+        'accounts': data
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def purchase(request):
