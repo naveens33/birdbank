@@ -43,6 +43,69 @@
           $(document).ready(function() {
                 $('.nav-item').removeClass('active');
                 $('#nav-paybills-tab').addClass('active');
+                $('#add_payee').click(function(){
+                    $('#payee_data').addClass("hide");
+                    setTimeout(function(){
+                        $("#add_new_payee_tab").removeClass("hide");
+                        $('#confirmation').addClass("hide");
+                        $('#confirmation1').addClass("hide");
+                    }, 500);
+                });
+                $('#cancel').click(function(){
+                    $("#add_new_payee_tab").addClass("hide");
+                    $('#payee_data').removeClass("hide");
+                });
+                $('#save').click(function(){
+                    $("#add_new_payee_tab").addClass("hide");
+                    $('#confirmation').removeClass("hide");
+                    $('#payee_data').removeClass("hide");
+                    $('#confirmation1').addClass("hide");
+                });
+                $(".next").click(function(){
+                $("#spinner").removeClass("hide");
+                setTimeout(function(){
+                     $("#biller_info_tab").removeClass("hide");
+                    $("#payment_information_tab").removeClass("hide");
+                                    $("#spinner").addClass("hide");
+                }, 3000);
+                    billerName = $(this).siblings("td")[0].textContent;
+                    regNumber = $(this).siblings("td")[1].textContent;
+                    city = $(this).siblings("td")[2].textContent;
+                    $("#biller_name").text(billerName);
+                    $("#reg_num").text(regNumber);
+                    $("#city").text(city);
+                    $('#payee_data').addClass("hide");
+                    $('#confirmation').addClass("hide");
+                    $('#confirmation1').addClass("hide");
+                });
+                $('#confirm').click(function(){
+                    $("#add_new_payee_tab").addClass("hide");
+                    $('#confirmation1').removeClass("hide");
+                    $('#payee_data').removeClass("hide");
+                    $("#biller_info_tab").addClass("hide");
+                    $("#payment_information_tab").addClass("hide");
+                });
+                $('#accounttype').change(function(e) {
+                    e.preventDefault();
+                    var type = $(this).val();
+                    $.ajax({
+                        type: 'GET',
+                        url: "/getAccountNumbers",
+                        data: {
+                            'type': type,
+                        },
+                        dataType: 'json',
+                        beforeSend: function(){
+                           $('#accountnumber1').empty();
+                           $('#accountnumber1').append(`<option value="" selected>------Select Account-------</option>`);
+                        },
+                        success: function(data) {
+                            $.each(data['data'], function( index, account ) {
+                              $('#accountnumber1').append('<option value="'+account+'">'+account+'</option>');
+                            });
+                        }
+                    });
+                });
     });
     </script>
 </head>
@@ -62,8 +125,25 @@
                     <p class="m-1">Bill Payment</p>
                 </div>
                 <div class="row m-4 p-2 border ">
+
                     <div class="col-md-12">
-                    <div class="row" id="otheracc_data">
+                        <div id="spinner" class="row mt-2 hide">
+                            <div class=" col-md-12 text-center h2">
+                                <i class="fas fa-spinner fa-pulse"></i>
+                            </div>
+                        </div>
+
+                        <div id="confirmation" class="row bg-success mt-2 hide">
+                            <div class="col-md-12 text-white text-center fs-1 h5 m-2">
+                                    <i class="fas fa-thumbs-up"></i> <span id="confirmationMessage"> Payee Added Successful</span>
+                            </div>
+                        </div>
+                        <div id="confirmation1" class="row bg-success mt-2 hide">
+                            <div class="col-md-12 text-white text-center fs-1 h5 m-2">
+                                    <i class="fas fa-thumbs-up"></i> <span>Payment Done!</span>
+                            </div>
+                        </div>
+                    <div class="row" id="payee_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-light">
@@ -72,7 +152,7 @@
                                         <th class="border-right text-center" rowspan="2" scope="col">Registration Number</th>
                                         <th class="border-right text-center" rowspan="2" scope="col">City</th>
                                         <th class="border-right text-center" colspan="5" scope="col">Auto Pay</th>
-                                        <th class="border-right text-center" rowspan="2" scope="col"></th>
+                                        <!--<th class="border-right text-center" rowspan="2" scope="col"></th>-->
                                         <th class="border-right text-center" rowspan="2" scope="col"></th>
                                     </tr>
                                     <tr>
@@ -93,7 +173,7 @@
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
-                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
+                                        <!--<td class="text-center p-0 next"><i class="far fa-edit"></i></td>-->
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
@@ -105,7 +185,7 @@
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
-                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
+                                        <!--<td class="text-center p-0 next"><i class="far fa-edit"></i></td>-->
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
@@ -117,7 +197,7 @@
                                         <td class="text-center">Monthly</td>
                                         <td class="text-center">16-06-2020</td>
                                         <td class="text-center">16-06-2022</td>
-                                        <td class="text-center p-0 next"><i class="far fa-edit"></i></td>
+                                        <!--<td class="text-center p-0 next"><i class="far fa-edit"></i></td>-->
                                         <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
@@ -129,175 +209,138 @@
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
                                         <td class="text-center">-</td>
-                                        <td class="text-center p-2 next"><i class="far fa-edit"></i></td>
+                                        <!--<td class="text-center p-2 next"><i class="far fa-edit"></i></td>-->
                                         <td class="text-center p-2 next"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td colspan="10" class="text-right">
-                                            <button type="button" class="btn btn-primary primary-button">
+                                            <button type="button" class="btn btn-primary primary-button" id="add_payee">
                                              <i class="fas fa-plus-circle"></i> Add New Biller
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="8" class="border-bottom">
-                                           <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1 ">
-                                                    Biller Name
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Biller Name" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Registration Number
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Registration Number" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Auto Pay
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <div class="row ">
-                                                        <div class="col-md-6 mb-1 ">
-                                                            <div class="custom-control custom-radio">
-                                                              <input type="radio" id="yes" name="customRadio" class="custom-control-input">
-                                                              <label class="custom-control-label" for="yes">Yes</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-1 ">
-                                                            <div class="custom-control custom-radio">
-                                                              <input type="radio" id="no" name="customRadio" class="custom-control-input">
-                                                              <label class="custom-control-label" for="no">No</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                             <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Auto Pay Limit
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Pay Limit" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                             <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Auto Pay Frequency
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <select name="accounttype" id="frequency" class="form-control" style="font-size:0.8rem">
-                                                        <option value="SAV">Monthly</option>
-                                                        <option value="AUD">Quarterly</option>
-                                                        <option value="BTC">Half Yearly</option>
-                                                        <option value="BTC">Annually</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Auto Pay StartDate
-                                                </div>
-                                                 <div class="col-md-3">
-                                                    <input type="text" id="start_date" class=" date_picker form-control form-control-sm">
-                                                    <script>
-                                                        $(document).ready(function() {
-
-                                                            $(function() {
-                                                                $( ".date_picker" ).datepicker();
-                                                            });
-                                                        })
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Auto Pay EndDate
-                                                </div>
-                                                 <div class="col-md-3">
-                                                    <input type="text" id="end_date" class=" date_picker form-control form-control-sm">
-                                                    <script>
-                                                        $(document).ready(function() {
-
-                                                            $(function() {
-                                                                $( ".date_picker" ).datepicker();
-                                                            });
-                                                        })
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-9 text-right">
-                                                    <button type="button" class="btn btn-primary primary-button">
-                                                        Cancel
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary primary-button">
-                                                        Continue
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                        </div>
                     </div>
-                    <div class="row hide" id="ownacc_data">
-                        <div class="col-md-12 mb-1 mt-4 table-responsive">
-                            <table class="table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="border-right text-center" scope="col">Account Number</th>
-                                        <th class="border-right text-center" scope="col">Branch</th>
-                                        <th class="border-right text-center" scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="small">
+                        <div id="add_new_payee_tab" class="small hide">
+                           <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1 ">
+                                    Biller Name
+                                </div>
+                                 <div class="col-md-3">
+                                     <input type="text" class="form-control" placeholder="Enter Biller Name" style="font-size:0.8rem">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Registration Number
+                                </div>
+                                 <div class="col-md-3">
+                                     <input type="text" class="form-control" placeholder="Enter Registration Number" style="font-size:0.8rem">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Auto Pay
+                                </div>
+                                 <div class="col-md-3">
+                                     <div class="row ">
+                                        <div class="col-md-6 mb-1 ">
+                                            <div class="custom-control custom-radio">
+                                              <input type="radio" id="yes" name="customRadio" class="custom-control-input">
+                                              <label class="custom-control-label" for="yes">Yes</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-1 ">
+                                            <div class="custom-control custom-radio">
+                                              <input type="radio" id="no" name="customRadio" class="custom-control-input">
+                                              <label class="custom-control-label" for="no">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Auto Pay Limit
+                                </div>
+                                 <div class="col-md-3">
+                                     <input type="text" class="form-control" placeholder="Enter Pay Limit" style="font-size:0.8rem">
+                                </div>
+                            </div>
+                             <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Auto Pay Frequency
+                                </div>
+                                 <div class="col-md-3">
+                                     <select name="accounttype" id="frequency" class="form-control" style="font-size:0.8rem">
+                                        <option value="SAV">Monthly</option>
+                                        <option value="AUD">Quarterly</option>
+                                        <option value="BTC">Half Yearly</option>
+                                        <option value="BTC">Annually</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Auto Pay StartDate
+                                </div>
+                                 <div class="col-md-3">
+                                    <input type="text" id="start_date" class=" date_picker form-control form-control-sm">
+                                    <script>
+                                        $(document).ready(function() {
 
-                                    <tr class="sub_heading">
-                                        <td colspan="3"><strong>Savings Accounts</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9999000453354533</td>
-                                        <td>San Martin</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9999000453354527</td>
-                                        <td>Chumacera</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                    <tr class="sub_heading">
-                                        <td colspan="3"><strong>Loan Accounts</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9999000453354533</td>
-                                        <td>San Martin</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                       </div>
-                    </div>
+                                            $(function() {
+                                                $( ".date_picker" ).datepicker();
+                                            });
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-1">
+                                    Auto Pay EndDate
+                                </div>
+                                 <div class="col-md-3">
+                                    <input type="text" id="end_date" class=" date_picker form-control form-control-sm">
+                                    <script>
+                                        $(document).ready(function() {
+
+                                            $(function() {
+                                                $( ".date_picker" ).datepicker();
+                                            });
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-9 text-right">
+                                    <button type="button" class="btn btn-primary primary-button" id="cancel">
+                                        Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-primary primary-button" id="save">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide" id="biller_info_tab">
+
                     <div class="row sub_heading mt-4  p-2">
                         <div class="col-md-12">
                             <strong>Biller Information</strong>
@@ -309,8 +352,8 @@
                         <div class="col-md-2 ml-3 ">
                             Biller Name
                         </div>
-                         <div class="col-md-4">
-                             <strong>SBI Life Insurance Company Limited</strong>
+                         <div class="col-md-4" id="biller_name">
+                             <strong></strong>
                         </div>
                     </div>
                     <div class="row small mt-2">
@@ -319,8 +362,8 @@
                         <div class="col-md-2 ml-3">
                             Registration Number
                         </div>
-                         <div class="col-md-3">
-                             <strong>9884231263954936</strong>
+                         <div class="col-md-3" id="reg_num">
+                             <strong></strong>
                         </div>
                     </div>
                     <div class="row small mt-2">
@@ -329,10 +372,12 @@
                         <div class="col-md-2 ml-3">
                             City
                         </div>
-                         <div class="col-md-3">
-                             <strong>Novy Leningrad</strong>
+                         <div class="col-md-3" id="city">
+                             <strong></strong>
                         </div>
                     </div>
+                    </div>
+                        <div class="hide" id="payment_information_tab">
                     <div class="row sub_heading mt-4 p-2">
                         <div class="col-md-12 align-middle">
                             <strong>Payment Information</strong>
@@ -346,9 +391,10 @@
                         </div>
                          <div class="col-md-3">
                              <select name="accounttype" id="accounttype" class="form-control" style="font-size:0.8rem">
-                                <option value="SAV">Savings</option>
-                                <option value="AUD">Loan</option>
-                                <option value="BTC">Credit</option>
+                                <option value="" selected>------Select Account-------</option>
+                                 {% for key, value in accounts.items %}
+                                    <option value="{{ key|slice:'0:3' }}">{{key}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -360,8 +406,7 @@
                         </div>
                          <div class="col-md-3">
                              <select name="accountnumber" id="accountnumber1" class="form-control" style="font-size:0.8rem">
-                                <option value="SAV">9999000453354533</option>
-                                <option value="AUD">9999000453354527</option>
+                                <option value="">------Select Account-------</option>
                             </select>
                         </div>
                     </div>
@@ -387,9 +432,10 @@
                     </div>
                     <div class="row small mt-2">
                         <div class="col-md-12 text-right">
-                        <button id="signin" type="button" class="btn btn-primary primary-button btn-rounded float-right">Confirm</button>
+                        <button id="confirm" type="button" class="btn btn-primary primary-button btn-rounded float-right">Confirm</button>
                         </div>
                     </div>
+                            </div>
                     </div>
                 </div>
             </section>

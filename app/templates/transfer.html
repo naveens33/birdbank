@@ -28,15 +28,80 @@
       $(document).ready(function() {
         $('.nav-item').removeClass('active');
         $('#nav-transfer-tab').addClass('active');
+
          $("#ownacc").click(function () {
             $("#ownacc_data").removeClass("hide");
             $("#otheracc_data").addClass("hide");
+            $("#new_payee_confirm").addClass("hide");
          });
          $("#otheracc").click(function () {
             $("#ownacc_data").addClass("hide");
             $("#otheracc_data").removeClass("hide");
+            $("#new_payee_confirm").addClass("hide");
          });
+         $(".next").click(function(){
+            $("#new_payee_confirm").addClass("hide");
+            $("#payment_info").removeClass("hide");
+            $("#account_category").addClass("hide");
+            $("#ownacc_data").addClass("hide");
+            $("#otheracc_data").addClass("hide");
+            var id = $(this).attr('id')
+            $('#toaccount').empty();
+            $('#toaccount').append('<option value="'+id+'">'+id+'</option>');
+            displayBalance($( "#fromaccount option:selected" ).text());
+         });
+         $("#cancel").click(function(){
+            $("#payment_info").addClass("hide");
+            $("#account_category").removeClass("hide");
+            $("#ownacc_data").removeClass("hide");
+            var id = $(this).attr('id')
+            $('#toaccount').append('<option value="'+id+'">'+id+'</option>');
+         });
+         $("#confirm_payment").click(function(){
+            $("#confirmation").removeClass("hide");
+            $("#payment_info").addClass("hide");
+            $("#toAccountConfirm").text($( "#toaccount option:selected" ).text());
+            $("#fromAccountConfirm").text($( "#fromaccount option:selected" ).text());
+            $("#amountConfirm").text("₹ "+$("#amount").val());
+            $("#messageConfirm").text($("#message").val());
+
+         });
+         $('select').on('change', function() {
+              displayBalance(this.options[this.selectedIndex].text);
+         });
+        $("#goback").click(function(){
+            $("#payment_info").addClass("hide");
+            $("#confirmation").addClass("hide");
+            $("#account_category").removeClass("hide");
+            $("#ownacc_data").removeClass("hide");
+            $("#ownacc").prop("checked",true);
+        });
+        $("#add_new_payee").click(function(){
+            $("#add_new_payee_tab").removeClass("hide");
+            $("#account_category").addClass("hide");
+            $("#ownacc_data").addClass("hide");
+            $("#otheracc_data").addClass("hide");
+            $("#new_payee_confirm").addClass("hide");
+        });
+        $("#save").click(function(){
+            $("#new_payee_confirm").removeClass("hide");
+            $("#message_").text($("#payee_name").val()+" added successfully");
+            $("#add_new_payee_tab").addClass("hide");
+            $("#account_category").removeClass("hide");
+            $("#otheracc_data").removeClass("hide");
+        });
       });
+      function displayBalance(accountNumber){
+      {% block javascript %}
+                {% for k,v in myaccounts.items %}
+                    {% for account in v %}
+                        if(accountNumber == {{account.AccountNumber}}){
+                        $("#account_balance").text("Balance: ₹ {{account.Balance}}")
+                        }
+                    {% endfor %}
+                {% endfor %}
+              {% endblock javascript %}
+      }
     </script>
 </head>
 <body>
@@ -54,9 +119,9 @@
                 <div class="navbar row pr-lg-5 title-section">
                     <p class="m-1">Money Transfer</p>
                 </div>
-                <div class="row m-4 p-2 border ">
+                <div class="row m-4 p-2 border">
                     <div class="col-md-12">
-                        <div class="row mt-2">
+                        <div class="row mt-2" id="account_category">
                             <div class="col-md-6 mb-1 text-right">
                                 <div class="custom-control custom-radio">
                                   <input type="radio" id="ownacc" name="customRadio" class="custom-control-input" checked>
@@ -70,7 +135,14 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="row hide" id="otheracc_data">
+
+                        <div class="row mt-2 bg-success rounded text-white h5 hide" id="new_payee_confirm">
+                                <div class="col-md-12 text-center fs-1 m-2">
+                                    <i class="fas fa-thumbs-up"></i> <span id="message_"></span>
+                                </div>
+                        </div>
+
+                        <div class="row hide" id="otheracc_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-light">
@@ -86,103 +158,102 @@
                                         <td>Mercy Mcneill</td>
                                         <td>9884231263954936</td>
                                         <td>Laurel Bank</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="9884231263954936"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Kajetan Chapman</td>
                                         <td>5925247767748193</td>
                                         <td>Moorfield States</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="5925247767748193"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Barsati Sandipa</td>
                                         <td>7429844648620015</td>
                                         <td>Strathmore Pvt</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="7429844648620015"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Kajetan Chapman</td>
                                         <td>2213195423875453</td>
                                         <td>Laurel Bank</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="2213195423875453"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Dhritiman Salim</td>
                                         <td>5583185435770357</td>
                                         <td>Strathmore Pvt</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="5583185435770357"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Vijai Sritharan</td>
                                         <td>8480746255092104</td>
                                         <td>Strathmore Pvt</td>
-                                        <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                        <td class="text-center p-0 next" id="8480746255092104"><i class="fas fa-angle-double-right"></i></td>
                                     </tr>
                                     <tr>
                                         <td colspan="4" class="text-right">
-                                            <button type="button" class="btn btn-primary primary-button">
+                                            <button type="button" class="btn btn-primary primary-button" id="add_new_payee">
                                              <i class="fas fa-plus-circle"></i> Add New Payee
                                             </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" class="border-bottom">
-                                           <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1 ">
-                                                    Payee Name
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Payee Name" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Account Number
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Account Number" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Bank Name
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Bank Name" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                             <div class="row mt-2">
-                                                <div class="col-md-4 text-right">
-                                                </div>
-                                                <div class="col-md-2 ml-1">
-                                                    Mobile Number
-                                                </div>
-                                                 <div class="col-md-3">
-                                                     <input type="text" class="form-control" placeholder="Enter Mobile Number" style="font-size:0.8rem">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-9 text-right">
-                                                    <button type="button" class="btn btn-primary primary-button">
-                                                        Cancel
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary primary-button">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                        </div>
                     </div>
+                    <div id="add_new_payee_tab" class="hide">
+                       <div class="row mt-2">
+                            <div class="col-md-4 text-right">
+                            </div>
+                            <div class="col-md-2 ml-1 ">
+                                Payee Name
+                            </div>
+                             <div class="col-md-3">
+                                 <input type="text" id="payee_name" class="form-control" placeholder="Enter Payee Name" style="font-size:0.8rem">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4 text-right">
+                            </div>
+                            <div class="col-md-2 ml-1">
+                                Account Number
+                            </div>
+                             <div class="col-md-3">
+                                 <input type="text" class="form-control" placeholder="Enter Account Number" style="font-size:0.8rem">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4 text-right">
+                            </div>
+                            <div class="col-md-2 ml-1">
+                                Bank Name
+                            </div>
+                             <div class="col-md-3">
+                                 <input type="text" class="form-control" placeholder="Enter Bank Name" style="font-size:0.8rem">
+                            </div>
+                        </div>
+                         <div class="row mt-2">
+                            <div class="col-md-4 text-right">
+                            </div>
+                            <div class="col-md-2 ml-1">
+                                Mobile Number
+                            </div>
+                             <div class="col-md-3">
+                                 <input type="text" class="form-control" placeholder="Enter Mobile Number" style="font-size:0.8rem">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-9 text-right">
+                                <button type="button" class="btn btn-primary primary-button">
+                                    Cancel
+                                </button>
+                                <button type="button" class="btn btn-primary primary-button" id="save">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row" id="ownacc_data">
                         <div class="col-md-12 mb-1 mt-4 table-responsive">
                             <table class="table">
@@ -217,7 +288,7 @@
                                             <tr>
                                                 <td>{{account.AccountNumber}}<span>  (Balance: ₹{{account.Balance}})</span></td>
                                                 <td>{{account.Branch}}</td>
-                                                <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                                <td class="text-center p-0 next" id="{{account.AccountNumber}}"><i class="fas fa-angle-double-right"></i></td>
                                             </tr>
                                         {% endfor %}
                                       {% endif %}
@@ -231,7 +302,7 @@
                                             <tr>
                                                 <td>{{account.AccountNumber}}<span>  (Balance: ₹{{account.Balance}})</span></td>
                                                 <td>{{account.Branch}}</td>
-                                                <td class="text-center p-0 next"><i class="fas fa-angle-double-right"></i></td>
+                                                <td class="text-center p-0 next" id="{{account.AccountNumber}}"><i class="fas fa-angle-double-right"></i></td>
                                             </tr>
                                         {% endfor %}
                                       {% endif %}
@@ -240,7 +311,7 @@
                             </table>
                        </div>
                     </div>
-                    <div class="row sub_heading mt-4  p-2">
+                    <!--<div class="row sub_heading mt-4  p-2">
                         <div class="col-md-12">
                             <strong>Payee Information</strong>
                         </div>
@@ -274,64 +345,126 @@
                          <div class="col-md-3">
                              <strong>Strathmore Pvt</strong>
                         </div>
-                    </div>
-                    <div class="row sub_heading mt-4 p-2">
-                        <div class="col-md-12 align-middle">
-                            <strong>Payment Information</strong>
+                    </div>-->
+                        <div id="payment_info" class="hide">
+                            <div class="row sub_heading mt-4 p-2">
+                                <div class="col-md-12 align-middle">
+                                    <strong>Payment Information</strong>
+                                </div>
+                            </div>
+                            <div class="row small mt-3">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3 align-middle">
+                                    To Account
+                                </div>
+                                 <div class="col-md-3">
+                                     <select name="toaccount" id="toaccount" class="form-control" style="font-size:0.8rem" disabled>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row small mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    From Account
+                                </div>
+                                 <div class="col-md-3">
+                                     <select name="fromaccount" id="fromaccount" class="form-control" style="font-size:0.8rem">
+                                         {% for k,v in myaccounts.items %}
+                                             {% for account in v %}
+                                                <option value="{{account.AccountNumber|slice:'-3:'}}">{{account.AccountNumber}}</option>
+                                             {% endfor %}
+                                         {% endfor %}
+                                    </select>
+                                     <span id="account_balance"></span>
+                                </div>
+                            </div>
+                            <div class="row small mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    Amount
+                                </div>
+                                 <div class="col-md-3 ">
+                                     <input type="text" class="form-control" id="amount" placeholder="Enter the amount" style="font-size:0.8rem">
+                                </div>
+                            </div>
+                            <div class="row small mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    Message
+                                </div>
+                                 <div class="col-md-3 ">
+                                     <input type="text" class="form-control" id="message" placeholder="What's this for" style="font-size:0.8rem">
+                                </div>
+                            </div>
+                            <div class="row small mt-2">
+                                <div class="col-md-12">
+                                    <button id="confirm_payment" type="button" class="btn btn-primary primary-button btn-rounded float-right">Confirm</button>
+                                    <button id="cancel" type="button" class="btn btn-secondary btn-rounded float-right" style="margin-right: 10px;">Cancel</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row small mt-3">
-                        <div class="col-md-4 text-right">
+                        <div id="confirmation" class="hide">
+                            <div class="row mt-2 bg-success rounded text-white h5">
+                                <div class="col-md-12 text-center fs-1 m-2">
+                                    <i class="fas fa-thumbs-up"></i> <span id="confirmationMessage"> Transaction Successful</span>
+                                </div>
+                            </div>
+                             <div class="row mt-2 border-bottom">
+                                <div class="col-md-12">
+                                    Transaction Summary
+                                </div>
+                            </div>
+                            <div class="row  mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    To Account
+                                </div>
+                                 <div class="col-md-3" id="toAccountConfirm">
+
+                                 </div>
+                            </div>
+                                            <div class="row mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    From Account
+                                </div>
+                                 <div class="col-md-3" id="fromAccountConfirm">
+
+                                 </div>
+                            </div>
+                                                        <div class="row  mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    Amount
+                                </div>
+                                 <div class="col-md-3" id="amountConfirm">
+
+                                 </div>
+                            </div>
+                                                        <div class="row  mt-2">
+                                <div class="col-md-4 text-right">
+                                </div>
+                                <div class="col-md-2 ml-3">
+                                    Message
+                                </div>
+                                 <div class="col-md-3" id="messageConfirm">
+
+                                 </div>
+                            </div>
+                            <div class="row small mt-2">
+                                <div class="col-md-12">
+                                    <button id="goback" type="button" class="btn btn-primary primary-button btn-rounded float-right">Back to view account</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-2 ml-3 align-middle">
-                            Account Type
-                        </div>
-                         <div class="col-md-3">
-                             <select name="accounttype" id="accounttype" class="form-control" style="font-size:0.8rem">
-                                <option value="SAV">Savings</option>
-                                <option value="AUD">Loan</option>
-                                <option value="BTC">Credit</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row small mt-2">
-                        <div class="col-md-4 text-right">
-                        </div>
-                        <div class="col-md-2 ml-3">
-                            Account Number
-                        </div>
-                         <div class="col-md-3">
-                             <select name="accountnumber" id="accountnumber1" class="form-control" style="font-size:0.8rem">
-                                <option value="SAV">9999000453354533</option>
-                                <option value="AUD">9999000453354527</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row small mt-2">
-                        <div class="col-md-4 text-right">
-                        </div>
-                        <div class="col-md-2 ml-3">
-                            Amount
-                        </div>
-                         <div class="col-md-3 ">
-                             <input type="text" class="form-control" placeholder="Enter the amount" style="font-size:0.8rem">
-                        </div>
-                    </div>
-                    <div class="row small mt-2">
-                        <div class="col-md-4 text-right">
-                        </div>
-                        <div class="col-md-2 ml-3">
-                            Message
-                        </div>
-                         <div class="col-md-3 ">
-                             <input type="text" class="form-control" placeholder="What's this for" style="font-size:0.8rem">
-                        </div>
-                    </div>
-                    <div class="row small mt-2">
-                        <div class="col-md-12 text-right">
-                        <button id="signin" type="button" class="btn btn-primary primary-button btn-rounded float-right">Confirm</button>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </section>

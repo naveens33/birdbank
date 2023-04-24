@@ -1,12 +1,12 @@
 {% load static %}
 <header class=" header navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
-      <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+      <a class="navbar-brand mr-0 mr-md-2" aria-label="Bootstrap">
         <img class="logo" src="{%static 'logo.png'%}" alt="">
       </a>
     <div>
-            <span class="ml-5" style="color: #ffffff">Welcome, </span>
+            <span class="ml-1" style="color: #ffffff">Welcome, </span>
             <span id="uname" class="" style="color: #ffffff">{{ user.username }}</span><br/>
-            <span id="lastlogin" class="small ml-5" style="color: #ffffff">Last Login -  {{user.last_login}}</span>
+            <span id="lastlogin" class="small ml-1" style="color: #ffffff">Last Login -  {{user.last_login}}</span>
 </div>
 
       <div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">

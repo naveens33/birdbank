@@ -1,5 +1,10 @@
 <script type="text/javascript">
 $(function() {
+  $("#nav-account-tab").click(function(event) {
+    var path = "/";
+            event.preventDefault();
+            window.location.href = path + "myaccounts";
+    });
     $("#nav-transactions-tab").click(function(event) {
     var path = "/";
             event.preventDefault();
