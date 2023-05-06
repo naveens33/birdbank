@@ -25,7 +25,7 @@ SECRET_KEY = '6@c$&(gtd!q7tu!f)nx#h8j$-%)=y&*s*-=6b@1y8h(j*dl!$y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['birdbank.pythonanywhere.com']
 
 
 # Application definition
