@@ -5,7 +5,11 @@
     <title>Loan - Bird Bank</title>
         {% load static %}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -43,6 +47,18 @@
           $(document).ready(function() {
                 $('.nav-item').removeClass('active');
                 $('#nav-loan-tab').addClass('active');
+                $('span:contains("Apply Now")').click(function(){
+                    title = $(this).siblings().filter("h5").text();
+
+                    $("div.title-section>p").text(title);
+                    $("#loan_details_tab").removeClass("hide");
+                    $("#loan_sections_tab").addClass("hide");
+                });
+                $('#basic').multiselect({
+                    templates: {
+                        li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
+                    }
+                });
     });
     </script>
 </head>
@@ -60,7 +76,7 @@
             <section class="bg-light shadow p-3 rounded">
                 <div class="row m-4 p-2 border ">
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row" id="loan_sections_tab">
                             <div class="col-md-4">
                                  <div class="card mt-3 product-div1 text-white bg-dark">
                                     <img class="card-img-top img-responsive transition img-transform zoom" src="{% static 'car.jpg'%}"  alt="Card image cap" height="175px">
@@ -68,7 +84,7 @@
                                        <h5 class="card-title medium">Car Loan</h5>
                                        <p class="card-text small mb-2">Bird Bank offers car loan schemes at lowest interest rates ranging from 8.05% p.a. to 10.30% p.a. for new car loans and from 12.80% p.a. to 14.80% p.a. for pre-owned car loans.</p>
                                        <br/>
-                                        <a href="" class="btn btn-outline-light btn-sm ">Apply Now</a>
+                                        <span class="btn btn-outline-light btn-sm ">Apply Now</span>
                                     </div>
                                  </div>
                             </div>
@@ -78,7 +94,7 @@
                                     <div class="card-body">
                                        <h5 class="card-title medium">Two Wheeler Loan</h5>
                                        <p class="card-text small">Bird Bank offers two wheeler loan schemes at lowest interest rates ranging from 9.55% p.a. to 14.30% p.a. for new two wheeler loans and from 16.80% p.a. to 19.80% p.a. for pre-owned two wheeler loans.</p>
-                                       <a href="" class="btn btn-outline-light btn-sm ">Apply Now</a>
+                                        <span class="btn btn-outline-light btn-sm ">Apply Now</span>
                                     </div>
                                 </div>
                             </div>
@@ -89,11 +105,12 @@
                                        <h5 class="card-title medium">Personal Loan</h5>
                                        <p class="card-text small mb-4">Bird Bank offers personal loan schemes at lowest interest rates ranging from 10.55% p.a. to 24.30% p.a.</p>
                                        <br/>
-                                        <a href="" class="btn btn-outline-light btn-sm mt-4">Apply Now</a>
+                                        <span class="btn btn-outline-light btn-sm mt-4">Apply Now</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div id="loan_details_tab" class ="hide">
                         <div class="row mt-4  p-2">
                             <div class="col-md-12">
                                 <div class="navbar row pr-lg-5 title-section">
@@ -182,7 +199,7 @@
                                         <label class="slider-heading mt-4 medium">Processing Fee</label>
                                     </div>
                                     <div class="col-md-4 text-center mt-3">
-                                        <span class="input-rupee left"><input type="text" class=" input_field rounded p-2 pl-4"></span>
+                                        <span class="input-rupee left"><input type="text" class=" input_field rounded p-2 pl-4" id="processing_fee" value="0"></input></span>
                                     </div>
                                  </div>
                                 <div class="row border-top mt-3">
@@ -192,7 +209,12 @@
                                 </div>
                                 <div class="row border-top p-3 primary-button mt-3">
                                     <div class="col-md-12 text-center">
-                                        <h5 class="mt-2">Your Monthly Loan EMI : ₹ <span id="result_emi">2,536</span></h5>
+                                        <h5 class="mt-2">Your Monthly Loan EMI : ₹ <span id="result_emi">0</span></h5>
+                                    </div>
+                                </div>
+                                <div class="row border-top p-3 mt-3" style="width: 110%;height: 35%;">
+                                    <div class="col-md-12 text-center">
+                                        <iframe  src="https://naveens33.github.io/ctreport-selenium/" title="Iframe Example" style="width: 100%;height: 100%;"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -221,17 +243,41 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col-md-12">
+                                        <label class="small" >Select following proof document to upload</label><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select class="custom-select" id="basic" multiple="multiple">
+                                            <option value="aadhar_card">Aadhar card</option>
+                                            <option value="license">License</option>
+                                            <option value="pan_card">Pan card</option>
+                                            <option value="ration_card">Ration card</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <label class="small" >Upload proof document to process your loan </label><br>
+                                        <input type="file" id="myFile" name="filename">
+                                        <label class="small" >`Note: This is a demo site, uploaded documents are not stored anywhere`</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
                                         <div class="checkbox">
                                             <label class="small" ><input type="checkbox" class="small mr-2" value="">I authorize Bird Bank to call on the above mentioned number and explain the features of the car loan.</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row border-top mt-2">
+                                <div class="row border-top mt-2 mb-2">
                                     <div class="col-md-12 mt-2 text-center">
                                         <button id="submit" type="button" class="btn btn-primary primary-button btn-rounded mt-3">Submit</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <script>
 
@@ -243,12 +289,16 @@
                             console.log(r);
                             console.log(n);
                             emi=(p*r*(Math.pow((1+r),n))/(Math.pow((1+r),n)-1)).toFixed(0);
+                            console.log(emi);
+                            emi = processingFee = parseInt(emi)+parseInt($("#processing_fee").val());
                             emi=emi.toString();
+                            console.log(emi);
                             var lastThree = emi.substring(emi.length-3);
                             var otherNumbers = emi.substring(0,emi.length-3);
                             if(otherNumbers != '')
                                 lastThree = ',' + lastThree;
                             var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+
                             $('#result_emi').text(res);
                             });
                         </script>

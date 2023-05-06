@@ -241,7 +241,7 @@
                                                   <div class="col-md-12 draggable" id="drag1">
                                                     <img class="ml-5 " src="{% static 'goldbar.png'%}" width="45%">
                                                     <div class="grams-overlay">
-                                                        <div class="text">10 Grams</div>
+                                                        <div class="text"><span>10</span> Grams</div>
                                                     </div>
                                                   </div>
                                               </div>
@@ -249,7 +249,7 @@
                                                   <div class="col-md-12 draggable" id="drag2">
                                                         <img class="ml-5" src="{% static 'goldbar.png'%}" width="45%">
                                                         <div class="grams-overlay">
-                                                            <div class="text">40 Grams</div>
+                                                            <div class="text"><span>40</span> Grams</div>
                                                         </div>
                                                   </div>
                                               </div>
@@ -257,7 +257,7 @@
                                                   <div class="col-md-12 draggable" id="drag3">
                                                         <img class="ml-5" src="{% static 'goldbar.png'%}" width="45%">
                                                         <div class="grams-overlay">
-                                                            <div class="text">50 Grams</div>
+                                                            <div class="text"><span>50</span> Grams</div>
                                                         </div>
                                                   </div>
                                               </div>
@@ -273,7 +273,7 @@
                                             Total Gold:
                                         </div>
                                         <div class="col-md-2 p-2 bg-warning text-center">
-                                            0 grams
+                                            <span id="total_gold">0</span> grams
                                         </div>
                                         <div class="col-md-4">
                                         </div>
@@ -301,6 +301,8 @@
 
                         function handleDropEvent( event, ui ) {
                           var draggable = ui.draggable;
+                          var gram = parseInt($(draggable).find('div.text span').text());
+                          $("#total_gold").text(parseInt($("#total_gold").text())+gram);
                           draggable.fadeOut();
                           $('.cart').attr("src","{% static 'filled_cart.png'%}");
                         }

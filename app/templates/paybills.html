@@ -47,6 +47,7 @@
                     $('#payee_data').addClass("hide");
                     setTimeout(function(){
                         $("#add_new_payee_tab").removeClass("hide");
+                        $("#add_new_payee_tab").prepend(add_payee_element());
                         $('#confirmation').addClass("hide");
                         $('#confirmation1').addClass("hide");
                     }, 500);
@@ -79,11 +80,19 @@
                     $('#confirmation1').addClass("hide");
                 });
                 $('#confirm').click(function(){
-                    $("#add_new_payee_tab").addClass("hide");
-                    $('#confirmation1').removeClass("hide");
-                    $('#payee_data').removeClass("hide");
-                    $("#biller_info_tab").addClass("hide");
-                    $("#payment_information_tab").addClass("hide");
+                    console.log($('#accounttype option:selected').text());
+                    if($('#amount').val()=="" ||
+                    $('#accounttype option:selected').text().includes("------Select Account-------") ||
+                    $('#accountnumber1 option:selected').text().includes("------Select Account-------")){
+                        alert("please fill the details");
+                    }
+                    else{
+                        $("#add_new_payee_tab").addClass("hide");
+                        $('#confirmation1').removeClass("hide");
+                        $('#payee_data').removeClass("hide");
+                        $("#biller_info_tab").addClass("hide");
+                        $("#payment_information_tab").addClass("hide");
+                    }
                 });
                 $('#accounttype').change(function(e) {
                     e.preventDefault();
@@ -106,7 +115,28 @@
                         }
                     });
                 });
+          $("#yes").click(function () {
+            $("#auto_section").removeClass("hide");
+         });
+
+          $("#no").click(function () {
+            $("#auto_section").addClass("hide");
+         });
     });
+    function add_payee_element(){
+        return `
+            <div class="row mt-2">
+                <div class="col-md-4 text-right">
+                </div>
+                <div class="col-md-2 ml-1 ">
+                    Biller Name
+                </div>
+                 <div class="col-md-3">
+                     <input type="text" class="form-control" placeholder="Enter Biller Name" style="font-size:0.8rem">
+                </div>
+            </div>
+        `
+    }
     </script>
 </head>
 <body>
@@ -223,17 +253,7 @@
                             </table>
                        </div>
                     </div>
-                        <div id="add_new_payee_tab" class="small hide">
-                           <div class="row mt-2">
-                                <div class="col-md-4 text-right">
-                                </div>
-                                <div class="col-md-2 ml-1 ">
-                                    Biller Name
-                                </div>
-                                 <div class="col-md-3">
-                                     <input type="text" class="form-control" placeholder="Enter Biller Name" style="font-size:0.8rem">
-                                </div>
-                            </div>
+                    <div id="add_new_payee_tab" class="small hide">
                             <div class="row mt-2">
                                 <div class="col-md-4 text-right">
                                 </div>
@@ -245,29 +265,30 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-4 text-right">
-                                </div>
-                                <div class="col-md-2 ml-1">
-                                    Auto Pay
-                                </div>
-                                 <div class="col-md-3">
-                                     <div class="row ">
-                                        <div class="col-md-6 mb-1 ">
-                                            <div class="custom-control custom-radio">
-                                              <input type="radio" id="yes" name="customRadio" class="custom-control-input">
-                                              <label class="custom-control-label" for="yes">Yes</label>
-                                            </div>
+                            <div class="col-md-4 text-right">
+                            </div>
+                            <div class="col-md-2 ml-1">
+                                Auto Pay
+                            </div>
+                             <div class="col-md-3">
+                                 <div class="row ">
+                                    <div class="col-md-6 mb-1 ">
+                                        <div class="custom-control custom-radio">
+                                          <input type="radio" id="yes" name="customRadio" class="custom-control-input" checked>
+                                          <label class="custom-control-label" for="yes">Yes</label>
                                         </div>
-                                        <div class="col-md-6 mb-1 ">
-                                            <div class="custom-control custom-radio">
-                                              <input type="radio" id="no" name="customRadio" class="custom-control-input">
-                                              <label class="custom-control-label" for="no">No</label>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6 mb-1 ">
+                                        <div class="custom-control custom-radio">
+                                          <input type="radio" id="no" name="customRadio" class="custom-control-input">
+                                          <label class="custom-control-label" for="no">No</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                             <div class="row mt-2">
+                            </div>
+                            <div id="auto_section">
+                                <div class="row mt-2">
                                 <div class="col-md-4 text-right">
                                 </div>
                                 <div class="col-md-2 ml-1">
@@ -327,6 +348,7 @@
                                         })
                                     </script>
                                 </div>
+                            </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-9 text-right">
@@ -417,7 +439,7 @@
                             Amount
                         </div>
                          <div class="col-md-3 ">
-                             <input type="text" class="form-control" placeholder="Enter the amount" style="font-size:0.8rem">
+                             <input type="text" class="form-control" id="amount" placeholder="Enter the amount" style="font-size:0.8rem">
                         </div>
                     </div>
                     <div class="row small mt-2">

@@ -138,7 +138,20 @@ def loans(request):
 
 @login_required
 def help(request):
-    return render(request, "help.html")
+    transactions = Transaction.objects.all().values()
+    myaccounts = Account.objects.all().values()
+    template = loader.get_template('help.html')
+    data = {}
+    for myaccount in myaccounts:
+        if myaccount['Type'] in data.keys():
+            data[myaccount['Type']].append(myaccount['AccountNumber'])
+        else:
+            data[myaccount['Type']] = [myaccount['AccountNumber']]
+    context = {
+        'transactions': transactions,
+        'accounts': data
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def testreport(request):
@@ -171,3 +184,7 @@ def getTransactions(request):
         return HttpResponse(json.dumps({'transactions': transactions}), content_type="application/json")  # Sending an success response
     else:
         return HttpResponse("Request method is not a GET")
+
+
+def ad1(request):
+    return render(request, "ad1.html")

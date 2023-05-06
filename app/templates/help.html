@@ -29,6 +29,34 @@
         $('#sidebar_secondary').addClass('popup-box-on');
     });
 
+    $("#submit").click(function(){
+        if (confirm("Are you sure you want to submit this question?")) {
+            $("#question").val('');
+            $("#accounttype").val($("#accounttype option:first").val());
+            $("#accountnumber1").val($("#accountnumber1 option:first").val());
+        }
+    });
+    $('#accounttype').change(function(e) {
+                    e.preventDefault();
+                    var type = $(this).val();
+                    $.ajax({
+                        type: 'GET',
+                        url: "/getAccountNumbers",
+                        data: {
+                            'type': type,
+                        },
+                        dataType: 'json',
+                        beforeSend: function(){
+                           $('#accountnumber1').empty();
+                           $('#accountnumber1').append(`<option value="" selected>------Select Account-------</option>`);
+                        },
+                        success: function(data) {
+                            $.each(data['data'], function( index, account ) {
+                              $('#accountnumber1').append('<option value="'+account+'">'+account+'</option>');
+                            });
+                        }
+                    });
+                });
     $("#close_chat").click(function () {
         $('#sidebar_secondary').removeClass('popup-box-on');
     });
@@ -349,9 +377,10 @@
                     </div>
                     <div class="col-md-7">
                         <select name="accounttype" id="accounttype" class="form-control">
-                            <option value="SAV">Savings</option>
-                            <option value="AUD">Loan</option>
-                            <option value="BTC">Credit</option>
+                            <option value="" selected>------Select Account-------</option>
+                             {% for key, value in accounts.items %}
+                                <option value="{{ key|slice:'0:3' }}">{{key}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -361,17 +390,16 @@
                     </div>
                     <div class="col-md-7">
                         <select name="accountnumber" id="accountnumber1" class="form-control">
-                            <option value="SAV">9999000453354533</option>
-                            <option value="AUD">9999000453354527</option>
+                            <option value="">------Select Account-------</option>
                         </select>
                     </div>
                 </div>
                <div class="row mt-2">
                    <div class="col-md-5 text-left">
-                       Information
+                       Question
                    </div>
                    <div class="col-md-7 text-left">
-                       <textarea class="form-control medium" placeholder="Submit your query, Our customer care will contact you" maxlength="1000"></textarea>
+                       <textarea class="form-control medium" id="question" placeholder="Submit your query, Our customer care will contact you" maxlength="1000"></textarea>
                    </div>
                </div>
                <div class="row mt-3 mb-3">

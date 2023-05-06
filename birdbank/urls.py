@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
 from app import views
 
 urlpatterns = [
@@ -33,5 +35,5 @@ urlpatterns = [
     path('forgotpassword', views.forgotpassword, name='forgotpassword'),
     path('testreport', views.testreport, name='testreport'),
     url(r'^getAccountNumbers/$', views.getAccountNumber, name='getAccountNumbers'),
-    url(r'^getTransactions/$', views.getTransactions, name='getTransactions'),
+    url(r'^getTransactions/$', views.getTransactions, name='getTransactions')
 ]
