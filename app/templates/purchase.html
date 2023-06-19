@@ -38,6 +38,25 @@
                 border-style: solid;
                 border-color: #003366;
             }
+        .context-menu {
+              display: none;
+              position: absolute;
+              background-color: #f1f1f1;
+              min-width: 120px;
+              box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+              z-index: 1;
+            }
+
+            .context-menu a {
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+            }
+
+            .context-menu a:hover {
+              background-color: #ddd;
+            }
     </style>
     <script>
           $(document).ready(function() {
@@ -60,10 +79,31 @@
                     $('#purchase_foreign_currency_tab').addClass("hide");
                     $('#purchase_gold_tab').addClass("hide");
                 });
+                 $('#droppable').on('contextmenu', function(e) {
+                    e.preventDefault(); // Prevent default right-click behavior
+                     var contextMenu = $('#contextMenu');
+                        contextMenu.css({
+                          display: 'block',
+                          left: e.pageX,
+                          top: e.pageY
+                        });
+                        $('#deleteOption').on('click', function() {
+                          // Perform the delete action
+                          console.log('Delete option clicked');
+                          contextMenu.hide();
+                          location.reload();
+                        });
+                        $(document).on('click', function() {
+                          contextMenu.hide();
+                        });
+                  });
     });
     </script>
 </head>
 <body>
+<div id="contextMenu" class="context-menu">
+  <span id="deleteOption">Clear All</span>
+</div>
   {% block content1 %}
     {% include "header2.html" %}
   {% endblock %}
