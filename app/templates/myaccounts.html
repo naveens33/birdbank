@@ -13,12 +13,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="{% static 'scripts.js' %}"></script>
-    <title>My Accounts - Bird Bank</title>
+    <script src="{% static 'disable_right_click.js' %}"></script>
+    <title>Accounts - Bird Bank</title>
+    <script>
+        $(document).ready(function() {
+    $(".copy-btn").on("dblclick", function() {
+        var textToCopy = $(this).siblings(".account-number").text().trim(); // Get the account number
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert("Copied: " + textToCopy);
+        }).catch(err => {
+            console.error("Failed to copy:", err);
+        });
+    });
+});
+
+    </script>
 </head>
 <body>
-<ul>
-
-</ul>
 
   {% block content2 %}
     {% include "header2.html" %}
@@ -53,7 +65,8 @@
                 {% for account in v %}
                 <div class="row mt-4 small">
                     <div class="col-md-3 mb-1 align-items-center">
-                        {{account.AccountNumber}}
+                        <span class="account-number">{{ account.AccountNumber }}</span>
+                        <span class="copy-btn"><i class="fas fa-copy"></i></span>
                     </div>
                     <div class="col-md-3 mb-1 align-items-center">
                         {{account.Branch}}
