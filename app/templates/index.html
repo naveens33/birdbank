@@ -15,6 +15,122 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="{% static 'scripts.js' %}"></script>
 </head>
+ <script>
+        class SupportSection extends HTMLElement {
+            constructor() {
+                super();
+
+                // Attach Shadow DOM
+                this.attachShadow({ mode: "open" });
+
+                // Add HTML content inside Shadow DOM
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            font-family: 'Verdana', sans-serif;
+                            display: block;
+                            max-width: 400px;
+                            margin: 20px auto;
+                            background: #ffffff;
+                            padding: 20px;
+                            border-radius: 12px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .container {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 15px;
+                        }
+
+                        label {
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: #333;
+                        }
+
+                        input, textarea {
+                            width: 100%;
+                            padding: 10px;
+                            font-size: 16px;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                            background: white;
+                        }
+
+                        textarea {
+                            height: 100px;
+                            resize: none;
+                        }
+
+                        .btn {
+                            width: 100%;
+                            padding: 12px;
+                            font-size: 16px;
+                            background-color: #007bff;
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            transition: background 0.3s ease-in-out;
+                        }
+
+                        .btn:hover {
+                            background-color: #0056b3;
+                        }
+
+                        .message {
+                            font-size: 14px;
+                            color: green;
+                            display: none;
+                        }
+                    </style>
+
+                    <div class="container">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter your username">
+
+                        <label for="question">Your Question</label>
+                        <textarea id="question" placeholder="Type your question here..."></textarea>
+
+                        <button class="btn" id="send-btn">Send</button>
+
+                        <p class="message" id="success-message">Your query has been sent successfully! ✅</p>
+                    </div>
+                `;
+
+                // Attach event listener for Send button
+                this.shadowRoot.querySelector("#send-btn").addEventListener("click", () => this.submitQuery());
+            }
+
+            submitQuery() {
+                const username = this.shadowRoot.querySelector("#username").value.trim();
+                const question = this.shadowRoot.querySelector("#question").value.trim();
+                const successMessage = this.shadowRoot.querySelector("#success-message");
+
+                if (!username || !question) {
+                    alert("Please fill in all fields before sending.");
+                    return;
+                }
+
+                // Simulate form submission (You can replace this with an API call)
+                console.log(`Username: ${username}, Question: ${question}`);
+
+                // Show success message
+                successMessage.style.display = "block";
+
+                // Clear input fields after submission
+                setTimeout(() => {
+                    this.shadowRoot.querySelector("#username").value = "";
+                    this.shadowRoot.querySelector("#question").value = "";
+                    successMessage.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        // Define custom element
+        customElements.define("support-section", SupportSection);
+    </script>
 <body>
 
   <!-- Footer -->
@@ -158,6 +274,10 @@
     {% block content2 %}
       {% include "purchasecurrency.html" %}
     {% endblock %}
+        <div class="container my-5">
+          <h4 style="text-align: center;">Support Section</h4>
+          <support-section></support-section>  <!-- Using the custom Shadow DOM component -->
+        </div>
   </div>
 
 <!-- Footer -->
